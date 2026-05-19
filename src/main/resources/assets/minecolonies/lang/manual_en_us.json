@@ -810,6 +810,11 @@
   "com.minecolonies.coremod.gui.townhall.jobhiring": "Auto Worker Hiring:",
   "com.minecolonies.coremod.gui.townhall.jobhiring.tooltip": "Automatically assigns citizens to empty jobs",
   "com.minecolonies.coremod.gui.townhall.printprogress.tooltip": "Print guide messages to aid progression",
+  "com.minecolonies.coremod.gui.townhall.protection": "Colony Protection:",
+  "com.minecolonies.coremod.gui.townhall.protection.tooltip": "Controls explosion prevention and who can build or break blocks within colony borders (Default uses server config).",
+  "com.minecolonies.core.townhall.setting.colonyProtection.default": "Default",
+  "com.minecolonies.core.townhall.setting.colonyProtection.on": "On",
+  "com.minecolonies.core.townhall.setting.colonyProtection.off": "Off",
 
   "com.minecolonies.coremod.gui.home.assign": "Assign %d citizens",
   "com.minecolonies.coremod.gui.workerhuts.managehousing": "Manage Housing",

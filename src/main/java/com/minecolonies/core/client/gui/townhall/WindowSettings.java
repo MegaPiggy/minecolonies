@@ -28,6 +28,8 @@ public class WindowSettings extends AbstractWindowTownHall
 
         moduleView.getSetting(BuildingTownHall.AUTO_HIRING_MODE)
           .setupHandler(BuildingTownHall.AUTO_HIRING_MODE, window.findPaneByID("job"), moduleView, buildingView, WindowSettings.this);
+        moduleView.getSetting(BuildingTownHall.COLONY_PROTECTION)
+          .setupHandler(BuildingTownHall.COLONY_PROTECTION, window.findPaneByID("protection"), moduleView, buildingView, WindowSettings.this);
         moduleView.getSetting(BuildingTownHall.MOVE_IN)
           .setupHandler(BuildingTownHall.MOVE_IN, window.findPaneByID("movein"), moduleView, buildingView, WindowSettings.this);
         moduleView.getSetting(BuildingTownHall.AUTO_HOUSING_MODE)
@@ -52,6 +54,8 @@ public class WindowSettings extends AbstractWindowTownHall
     {
         moduleView.getSetting(BuildingTownHall.AUTO_HIRING_MODE)
           .render(BuildingTownHall.AUTO_HIRING_MODE, window.findPaneByID("job"), moduleView, buildingView, WindowSettings.this);
+        moduleView.getSetting(BuildingTownHall.COLONY_PROTECTION)
+          .render(BuildingTownHall.COLONY_PROTECTION, window.findPaneByID("protection"), moduleView, buildingView, WindowSettings.this);
         moduleView.getSetting(BuildingTownHall.MOVE_IN)
           .render(BuildingTownHall.MOVE_IN, window.findPaneByID("movein"), moduleView, buildingView, WindowSettings.this);
         moduleView.getSetting(BuildingTownHall.AUTO_HOUSING_MODE)
