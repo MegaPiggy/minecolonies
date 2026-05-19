@@ -578,6 +578,32 @@ public class SettingsFactories
     }
 
     /**
+     * Specific factory for the colony protection setting.
+     */
+    public static class ColonyProtectionSettingFactory extends AbstractStringSettingsFactory<ColonyProtectionSetting>
+    {
+        @NotNull
+        @Override
+        public TypeToken<ColonyProtectionSetting> getFactoryOutputType()
+        {
+            return TypeToken.of(ColonyProtectionSetting.class);
+        }
+
+        @NotNull
+        @Override
+        public ColonyProtectionSetting getNewInstance(final List<String> value, final int curr)
+        {
+            return new ColonyProtectionSetting(value, curr);
+        }
+
+        @Override
+        public short getSerializationId()
+        {
+            return SerializationIdentifierConstants.COLONY_PROTECTION_SETTINGS_ID;
+        }
+    }
+
+    /**
      * Specific factory for the recipe setting.
      */
     public static class RecipeSettingFactory implements IRecipeSettingFactory<RecipeSetting>

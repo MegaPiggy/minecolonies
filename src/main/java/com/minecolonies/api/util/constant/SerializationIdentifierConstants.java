@@ -66,6 +66,7 @@ public class SerializationIdentifierConstants
     public static final short STATION_REQUEST_RESOLVER_ID                                        = 58;
     public static final short CRAFTING_SETTINGS_ID                                               = 59;
     public static final short MIN_STACK_REQUEST_ID                                               = 60;
+    public static final short COLONY_PROTECTION_SETTINGS_ID                                      = 61;
 
     private SerializationIdentifierConstants() {}
 }

@@ -18,6 +18,8 @@ import com.minecolonies.core.MineColonies;
 import com.minecolonies.core.blocks.BlockDecorationController;
 import com.minecolonies.core.blocks.huts.BlockHutTownHall;
 import com.minecolonies.core.colony.Colony;
+import com.minecolonies.core.colony.buildings.workerbuildings.BuildingTownHall;
+import com.minecolonies.core.colony.buildings.modules.settings.ColonyProtectionSetting;
 import com.minecolonies.core.colony.jobs.AbstractJobGuard;
 import com.minecolonies.core.entity.citizen.EntityCitizen;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
@@ -101,6 +103,38 @@ public class ColonyPermissionEventHandler
     }
 
     /**
+     * Determine if protection is enabled for this colony, taking the town-hall setting into account.
+     * If the setting is Default, fall back to server config.
+     *
+     * @return true if protection should be active for this colony
+     */
+    private boolean isProtectionEnabled()
+    {
+        final var settingsModule = colony.getSettings();
+        if (settingsModule == null)
+        {
+            return MineColonies.getConfig().getServer().enableColonyProtection.get();
+        }
+
+        final var setting = settingsModule.getSetting(BuildingTownHall.COLONY_PROTECTION);
+        if (setting == null)
+        {
+            return MineColonies.getConfig().getServer().enableColonyProtection.get();
+        }
+
+        final String val = setting.getValue();
+        if (ColonyProtectionSetting.ON.equals(val))
+        {
+            return true;
+        }
+        if (ColonyProtectionSetting.OFF.equals(val))
+        {
+            return false;
+        }
+        return MineColonies.getConfig().getServer().enableColonyProtection.get();
+    }
+
+    /**
      * BlockEvent.PlaceEvent handler.
      *
      * @param event BlockEvent.PlaceEvent
@@ -109,7 +143,7 @@ public class ColonyPermissionEventHandler
     public void on(final BlockEvent.EntityPlaceEvent event)
     {
         final Action action = event.getPlacedBlock().getBlock() instanceof AbstractBlockHut ? Action.PLACE_HUTS : Action.PLACE_BLOCKS;
-        if (MineColonies.getConfig().getServer().enableColonyProtection.get() && checkBlockEventDenied(event.getLevel(),
+        if (isProtectionEnabled() && checkBlockEventDenied(event.getLevel(),
           event.getPos(),
           event.getEntity(),
           event.getPlacedBlock(),
@@ -252,7 +286,7 @@ public class ColonyPermissionEventHandler
                 return;
             }
 
-            if (!MineColonies.getConfig().getServer().enableColonyProtection.get())
+            if (!isProtectionEnabled())
             {
                 building.destroy();
                 return;
@@ -345,7 +379,7 @@ public class ColonyPermissionEventHandler
     @SubscribeEvent
     public void on(final ExplosionEvent.Start event)
     {
-        if (MineColonies.getConfig().getServer().enableColonyProtection.get()
+        if (isProtectionEnabled()
               && MineColonies.getConfig().getServer().turnOffExplosionsInColonies.get() == Explosions.DAMAGE_NOTHING
               && colony.isCoordInColony(event.getLevel(), BlockPos.containing(event.getExplosion().center())))
         {
@@ -386,7 +420,7 @@ public class ColonyPermissionEventHandler
                 return;
             }
 
-            if (MineColonies.getConfig().getServer().enableColonyProtection.get())
+            if (isProtectionEnabled())
             {
                 if (!perms.hasPermission(event.getEntity(), Action.RIGHTCLICK_BLOCK) && !(block instanceof AirBlock))
                 {
@@ -533,7 +567,7 @@ public class ColonyPermissionEventHandler
         {
             positionToCheck = player.blockPosition();
         }
-        if (MineColonies.getConfig().getServer().enableColonyProtection.get()
+        if (isProtectionEnabled()
               && colony.isCoordInColony(player.getCommandSenderWorld(), positionToCheck)
               && !colony.getPermissions().hasPermission(player, action))
         {
@@ -675,7 +709,7 @@ public class ColonyPermissionEventHandler
 
         @NotNull final Player player = EntityUtils.getPlayerOfFakePlayer(event.getEntity(), event.getEntity().getCommandSenderWorld());
 
-        if (MineColonies.getConfig().getServer().enableColonyProtection.get()
+        if (isProtectionEnabled()
               && colony.isCoordInColony(player.getCommandSenderWorld(), player.blockPosition()))
         {
             final Permissions perms = colony.getPermissions();

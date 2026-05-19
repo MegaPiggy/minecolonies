@@ -503,7 +503,8 @@ public class BuildingModules
         .with(BuildingTownHall.ENTER_LEAVE_MESSAGES, new BoolSetting(true))
         .with(BuildingTownHall.AUTO_HOUSING_MODE, new BoolSetting(true))
         .with(BuildingTownHall.AUTO_HIRING_MODE, new BoolSetting(true))
-        .with(BuildingTownHall.CONSTRUCTION_TAPE, new BoolSetting(true)),
+        .with(BuildingTownHall.CONSTRUCTION_TAPE, new BoolSetting(true))
+        .with(BuildingTownHall.COLONY_PROTECTION, new ColonyProtectionSetting()),
         () -> TownHallSettingsModuleView::new);
 
     /**

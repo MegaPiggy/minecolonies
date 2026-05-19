@@ -22,6 +22,7 @@ import com.minecolonies.core.colony.buildings.AbstractBuilding;
 import com.minecolonies.core.colony.buildings.modules.BuildingModules;
 import com.minecolonies.core.colony.buildings.modules.settings.BoolSetting;
 import com.minecolonies.core.colony.buildings.modules.settings.SettingKey;
+import com.minecolonies.core.colony.buildings.modules.settings.ColonyProtectionSetting;
 import com.minecolonies.core.colony.buildings.views.AbstractBuildingView;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
@@ -83,6 +84,11 @@ public class BuildingTownHall extends AbstractBuilding implements ITownHall
      * Constructgion tape setting.
      */
     public static final ISettingKey<BoolSetting> CONSTRUCTION_TAPE = new SettingKey<>(BoolSetting.class, new ResourceLocation(MOD_ID, "tape"));
+
+    /**
+     * Colony protection setting.
+     */
+    public static final ISettingKey<ColonyProtectionSetting> COLONY_PROTECTION = new SettingKey<>(ColonyProtectionSetting.class, new ResourceLocation(MOD_ID, "colonyprotection"));
 
     /**
      * Instantiates the building.
